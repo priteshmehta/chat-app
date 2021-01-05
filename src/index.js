@@ -10,6 +10,8 @@ const port = process.env.PORT || 3000
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
+io.eio.pingTimeout = 120000; // 2 minutes
+io.eio.pingInterval = 5000;  // 5 seconds
 
 //to serve static assets
 const pubDir = path.join(__dirname, '../public')

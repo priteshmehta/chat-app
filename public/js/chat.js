@@ -102,9 +102,20 @@ $sendLocationBtn.addEventListener('click', ()=> {
     $sendLocationBtn.setAttribute('disabled', 'disabled')
     const geo = navigator.geolocation
     geo.getCurrentPosition((position)=>{ 
-        console.log(position)
-        socket.emit('sendLocation', {latitude: position.coords.latitude, longitude: position.coords.longitude})
-        $sendLocationBtn.removeAttribute('disabled')
+            console.log(position)
+            socket.emit('sendLocation', {latitude: position.coords.latitude, longitude: position.coords.longitude})
+            $sendLocationBtn.removeAttribute('disabled')
+        },(error) => {
+            if(error)
+                console.log("User has declined")
+                const dtObj= new Date()
+                const html = Mustache.render($msgTemplate, {
+                                message: "Please allow browser to get location",
+                                timestamp: dtObj.getHours() + ":" + dtObj.getMinutes(),
+                                username: "App"
+                            })
+                $messages.insertAdjacentHTML('beforeend', html)
+                $sendLocationBtn.removeAttribute('disabled')
     })
 })
 
