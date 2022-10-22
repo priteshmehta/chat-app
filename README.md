@@ -1,5 +1,5 @@
 # chat-app
 
-http://pritesh-chat-app.herokuapp.com/ 
+Production URL:  http://pritesh-chat-app.herokuapp.com
 
 
